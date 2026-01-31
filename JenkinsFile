@@ -11,8 +11,8 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                // 'bat' is for Windows. If your Jenkins is on Linux, use 'sh'
-                bat 'gradle clean test' 
+               def gradleHome = tool 'LocalGradle'
+            bat "${gradleHome}\\bin\\gradle clean test" 
             }
         }
 
