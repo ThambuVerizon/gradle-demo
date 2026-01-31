@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Pulls the code from the GitHub repo you configured
+                checkout scm
+            }
+        }
+
+        stage('Build & Test') {
+            steps {
+                // 'bat' is for Windows. If your Jenkins is on Linux, use 'sh'
+                bat 'gradle clean test' 
+            }
+        }
+
+        stage('Archive Artifact') {
+            steps {
+                // This captures the JAR file created in build/libs
+                archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
+            }
+        }
+    }
+}
