@@ -16,7 +16,7 @@ pipeline {
         stage('Build & Test') {
             steps {
                 // Now you can just use 'gradle.bat' directly
-                bat 'gradle.bat clean test' 
+                bat 'gradle.bat clean build' 
             }
         }
 
