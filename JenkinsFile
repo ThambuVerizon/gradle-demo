@@ -10,11 +10,13 @@ pipeline {
         }
 
         stage('Build & Test') {
-            steps {
-               def gradleHome = tool 'LocalGradle'
-            bat "${gradleHome}\\bin\\gradle clean test" 
-            }
+    steps {
+        script {
+            def gradleHome = tool 'LocalGradle'
+            bat "${gradleHome}\\bin\\gradle.bat clean test"
         }
+    }
+}
 
         stage('Archive Artifact') {
             steps {
