@@ -20,6 +20,12 @@ pipeline {
             }
         }
 
+        stage('SonarQube Analysis') {
+            steps {
+                bat 'gradle.bat sonar'
+            }
+        }
+
         stage('Archive Artifact') {
             steps {
                 archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true

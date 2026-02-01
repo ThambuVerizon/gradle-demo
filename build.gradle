@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco' 
+    id "org.sonarqube" version "4.4.1.3373"
 }
 
 group = 'com.bits.mvn'
@@ -29,5 +30,14 @@ jacocoTestReport {
     dependsOn test
     reports {
         html.required = true
+    }
+}
+
+sonar {
+    properties {
+        property "sonar.projectKey", "gradle-demo"
+        property "sonar.projectName", "gradle-demo"
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.token", "squ_c15696bf0c0b71e5be95a4d1d9b8ae2f612cc7f4" 
     }
 }
