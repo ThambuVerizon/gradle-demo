@@ -1,26 +1,27 @@
 pipeline {
     agent any
+    
+    tools {
+        // This adds Gradle to your PATH automatically, handling spaces for you
+        gradle 'LocalGradle' 
+    }
 
     stages {
         stage('Checkout') {
             steps {
-                // Pulls the code from the GitHub repo you configured
                 checkout scm
             }
         }
 
         stage('Build & Test') {
-    steps {
-        script {
-            def gradleHome = tool 'LocalGradle'
-            bat "${gradleHome}\\bin\\gradle.bat clean test"
+            steps {
+                // Now you can just use 'gradle.bat' directly
+                bat 'gradle.bat clean test' 
+            }
         }
-    }
-}
 
         stage('Archive Artifact') {
             steps {
-                // This captures the JAR file created in build/libs
                 archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
             }
         }
